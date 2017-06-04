@@ -58,7 +58,7 @@
         };
 
         TaxiTicket.description = function () {
-            return 'Take the' + this.companyName + ' taxi from '
+            return 'Take the ' + this.companyName + ' taxi from '
                 + this.from.displayName
                 + ' to ' + this.to.displayName;
         };
