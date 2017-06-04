@@ -25,8 +25,105 @@
 
 ==================================================================
 
-# Решение
-
-## Документация
-
 ### Формат входных данных
+
+В качестве формата входных данных задается массив из JS объектов. Скелет объекта следующая:
+```
+{
+        route: {
+            from: {},
+            to: {}
+        },
+        transport: {}
+}
+```
+Заданный объект, в свою очередь, содержит два вложенных объекта `route` и `transport`, которые соответственно, определяют маршрут движения  пассажира от точки отправки `from` с определенной широтой `lat` , долготой `lon` и с краткой информацией о местоположении `displayName`
+
+```
+from: {
+    lon: 0.0,
+    lat: 0.0,
+    displayName: ''
+}
+```
+и вид транспорта `transport` с обязательным свойством `type`, который задает тип транспорта, а также свойствами зависящимися от типа транспорта. Поддерживаемые транспорты следующие: 
+
+1. Самолет со свойствами: `flight` - определяет номер рейса, `gate` - выход на посадку, `seatNumber` - номер места и `baggage` - номер багажа.
+```
+transport = {
+            type: 'plane',
+            flight: '',
+            gate: '',
+            seatNumber: '',
+            baggage: '',
+        }
+```
+2. Поезд со свойствами: `number` - номер поезда, `seatNumber` - номер места.
+```
+transport = {
+            type: 'train',
+            number: '',
+            seatNumber: '',
+        }
+```
+3. Такси со свойством: `companyName` - название компании такси.
+```
+transport = {
+            type: 'taxi',
+            companyName: '',
+        }
+```
+4. Автобус без свойств.
+```
+transport = {
+            type: 'bus',
+        }
+```
+
+
+
+## Пример
+```
+[
+  {
+        route: {
+            from: {
+                lon: 35.50,
+                lat: 75.75,
+                displayName: 'New York airport'
+            },
+            to: {
+                lon: 48.60,
+                lat: 2.30,
+                displayName: 'Paris airport'
+            }
+        },
+        transport: {
+            type: 'plane',
+            flight: '3322',
+            gate: '7D',
+            seatNumber: '6A',
+            baggage: 'auto',
+        }
+    },
+    {
+        route: {
+            from: {
+                lon: 25.50,
+                lat: 36.3,
+                displayName: 'Texas training station'
+            },
+            to: {
+                lon: 35.50,
+                lat: 75.75,
+                displayName: 'New York airport'
+            }
+        },
+        transport: {
+            type: 'train',
+            seatNumber: '56B',
+            number: '666'
+        }
+    } , ...
+]
+```
