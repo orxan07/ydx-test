@@ -122,6 +122,10 @@
         function createTicket(ticketData) {
             var data = ticketData || {};
             var transportType = data.transport.type;
+
+            if (!transportType)
+                throw new Error('Transport type is not defined!');
+
             var ticket = null;
 
             switch (transportType.toLowerCase()) {
