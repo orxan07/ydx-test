@@ -154,10 +154,9 @@
     })();
 
     var SorterModule = (function () {
-
         var makeHash = function () {
             var hash = '';
-            for (var i = 0; i < arguments.length; i++) {
+            for (var i = 0, l = arguments.length; i < l; i++) {
                 hash += arguments[i] + '';
             }
             return hash;
@@ -166,8 +165,8 @@
             // building the hash table
             var hashMapFrom = {};
             var hashMapTo = {};
-            for (i in tickets) {
-
+            var ticketsCount = tickets.length;
+            for (var i = 0; i < ticketsCount; i++) {
                 var ticket = tickets[i];
                 var fromHash = makeHash(ticket.from.lat, ticket.from.lon);
                 var toHash = makeHash(ticket.to.lat, ticket.to.lon);
@@ -178,18 +177,18 @@
 
             var firstTicket;
             //finding the first ticket
-            for (i in tickets) {
+            for (var i = 0; i < ticketsCount; i++) {
                 ticket = tickets[i];
                 fromHash = makeHash(ticket.from.lat, ticket.from.lon);
                 if (!hashMapTo[fromHash]) {
                     firstTicket = ticket;
-                    break
+                    break;
                 }
             }
 
             tickets[0] = firstTicket;
             //sorting
-            for (var i = 1; i < tickets.length; i++) {
+            for (var i = 1; i < ticketsCount; i++) {
                 var c = tickets[i - 1];
                 toHash = makeHash(c.to.lat, c.to.lon);
                 var ticket = hashMapFrom[toHash];
@@ -226,7 +225,7 @@
         TicketSorter.prototype.displayRoute = function (callback) {
             var desc = [];
 
-            for (var i in this.tickets) {
+            for (var i = 0, l = this.tickets.length; i < l; i++) {
                 desc.push(this.tickets[i].description());
             }
 
@@ -236,7 +235,7 @@
         return {
             initTickets: function (tickets) {
                 var ticketSorter = new TicketSorter();
-                for (var i = 0; i < tickets.length; i++) {
+                for (var i = 0, l = tickets.length; i < l; i++) {
                     var ticketData = tickets[i];
                     var ticket = TicketFactory.createTicket(ticketData);
                     ticketSorter.addTicket(ticket);
